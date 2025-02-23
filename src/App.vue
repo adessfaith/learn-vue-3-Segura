@@ -1,63 +1,67 @@
 <template>
-  <div>
-    Hello, Vue!
-  </div>
+  <h1>{{ message }}</h1>
+  <img v-bind:src="imageUrl" alt="" />
+  <br />
+
+  <!-- shorthand for v-bind -->
+  <img :src="imageUrl" alt="" />
+  <br />
+
+  <button @click="changeImg">Change image</button>
+
+  <br />
+
+  <hr />
+
+  <input type="text" :value="defaultInputText" />
+
+  <hr />
+
+  <p :class="className">Harry Potter</p>
+
+  <!-- define a JS object in :class -->
+  <p :class="{ inactive: isInactive, center: isCenter }">
+    <!-- if you think embedding a JS object in HTML is verbose, you can choose to move the object to the script, 
+        give it a name, and only put the JS object name in :class -->
+    Harry Potter
+  </p>
+
+  <!-- define a JS array in :class -->
+  <p :class="['active', 'center']">Harry Potter</p>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 
+let message = 'Hello, v-bind!'
+let imageUrl = ref('public/img/banner_1.jpg')
+
+function changeImg() {
+  imageUrl.value = 'public/img/banner_2.jpg'
+}
+
+let defaultInputText = 'Write something here...'
+
+let className = ref('active')
+let isInactive = ref(true)
+let isCenter = ref(false)
 </script>
-
-<style lang="scss" scoped>
-
-</style>
-
-
-<!--<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
-</template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+img {
+  max-width: 300px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.active {
+  color: green;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+.inactive {
+  color: red;
+  text-decoration: line-through;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.center {
+  text-align: center;
 }
 </style>
-!-->
