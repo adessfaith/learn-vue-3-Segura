@@ -4,7 +4,7 @@
   <button @click="replaceText('v-on is fun!')">Replace text</button>
   </hr>
   <p> An input field where the user can ONLY enter numbers:</p>
-  <input type="text" @keyDown="handleInput($event)"/>
+  <input type="text" @keyDown.number="handleInput($event)"/>
 
   <hr>
   <div style="width:100px; height: 100px; background-color: aqua" @contextmenu.prevent="console.log('show custom context menu, prevent default menu')"></div>
