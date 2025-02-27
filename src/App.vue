@@ -12,35 +12,26 @@
     <h2>Wand: {{ wizard.wand }}</h2>
     <button @click="changeNameToUpperCase"> Change name to upper case</button>
     <button @click="changeWandCore"> Change wand core</button>
-    <button @click="changeWizard"> change wizard</button>
-    <button @click="wizard.wand.core = 'Pheonix feather'">Change wand core</button>
+    <button @click="changeWizard"> Change wizard</button>
+  
   </div>
   <div class = "card"><h2>Array:{{ wizards }}</h2>
     <button @click="wizards.push('Draco')"> Add a new wizard</button>
   </div>
 
- 
+ <!-- (ref) automatic in template-->
 </template>
 
 <script setup>
-import { ref } from 'vue'
-let wizard = ref({
-  id: 1001,
-  name: 'Harry Potter',
-  house: 'Gryffindor',
-  age: 17, // Age during the final battle of Hogwarts
-  wand: {
-    core: 'Phoenix feather',
-    wood: 'Holly'
-  }
-})
+import { ref } from 'vue';
+
 function changeNameToUpperCase(){
   wizard.value.name = wizard.value.name.toUpperCase();
 
 }
  
 function changeWandCore(){
-  wizard.value.wand.core = 'Pheonix feather';
+  wizard.value.wand.core = 'Unicorn Hair';
 
 }
 function changeWizard(){
@@ -60,28 +51,29 @@ function changeWizard(){
 
 
 
-let message = ref('Hello, Reactivity!')
-let number = ref(1)
+let message = ref('Hello, Reactivity!');
+let number = ref(1);
 
 function changeMessageToUpperCase() {
-  message.value = message.value.toUpperCase()
+  message.value = message.value.toUpperCase();// returns a .value property of the given object, returna an enhanced version of original data
  
-  console.log(message)
+  console.log(message.value);
 }
 function incrementNumber() {
-  number.value += 1
-  console.log(number.value)
+  number.value += 1;
+  console.log(number.value);
 }
 let wizard =ref({
   id:1001,
   name: 'Harry Potter',
-  house: 'Gryffindpr',
+  house: 'Gryffindor',
   age:17,
   wand:{
     core:'Pheonix feather',
     wood:'Holly'
   }
 })
+let wizards = ref(['Harry', 'Hermione', 'Ron']);
 
 </script>
 
