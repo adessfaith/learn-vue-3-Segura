@@ -4,20 +4,20 @@
   <button @click="replaceText('v-on is fun!')">Replace text</button>
   </hr>
   <p> An input field where the user can ONLY enter numbers:</p>
-  <input type="text" @keyDown.number="handleInput($event)"/>
+  <input type="text" @keydown="handleInput($event)"/>
 
   <hr>
   <div style="width:100px; height: 100px; background-color: aqua" @contextmenu.prevent="console.log('show custom context menu, prevent default menu')"></div>
   <div id="mouseover" @mouseover="fun1">
-    <text-area @mouseover.stop="fun2($event)">
+    <textarea @mouseover.stop="fun2($event)"> <!--stop default event proegation-->
       This is a test area
-    </text-area></div>
+    </textarea></div><!--represents the event that just happened-->
     <hr />
   <p>A demo of preventing the default behavior of an event.</p>
   <p>Right click in the cyan box below will not show the context menu:</p>
   <div
     style="width: 100px; height: 100px; background-color: aqua"
-    @contextmenu.prevent="console.log('Show a custom context menu instead.')"
+    @contextmenu.prevent="console.log('Cutsom conext menu')"
   ></div>
 
   <hr />
@@ -70,16 +70,18 @@ function replaceText(msg){
   message.value = msg;
 }
 function handleInput(event){
-  let keyCOde = event.keyCode;
-  if(keyCode <48||keyCode>57){
-    event.preventDefault();//vanillajs syntax
+  let KeyCode = event.key;
+  if(KeyCode <48||KeyCode>57){
+
+    event.preventDefault();//vanillajs syntax, pass a DOM event to a method
   }
+  console.log(event);
 
 }
 function fun1(){
   console.log('mouse over div');
 }
-function fun2(){
+function fun2(event){
   //event.stopPropagation();
   console.log('mouse over text area');
 
