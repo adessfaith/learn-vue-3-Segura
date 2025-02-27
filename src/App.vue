@@ -51,7 +51,7 @@ const users = ref([
 <style scoped>
 .inactive{
   color:red;
-  text-decoration: line-trhough;
+  text-decoration: line-through;
 
 }
 </style>
