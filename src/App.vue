@@ -47,10 +47,12 @@
     </div>
     <div>
       <span>Description:</span>
+      <!--.lazy syncs after chage events, .number typecasts as a number, .trim trims whitespace-->
       <!-- Leading and trailing whitespace is removed automatically. -->
+       
       <textarea
         v-model.trim="formData.desc"
-        @keyup.enter="submitForm"
+        @keydown.enter="submitForm"
       ></textarea>
     </div>
     <div>
