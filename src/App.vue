@@ -1,13 +1,13 @@
 <template>
   <h1>{{ message }}</h1>
-  <img v-bind:src="imageUrl" alt="" />
+  <img v-bind:src="imageUrl" alt="" />  <!-- v-bind allow variable names to be set as the attribute val-->
   <br />
 
   <!-- shorthand for v-bind -->
   <img :src="imageUrl" alt="" />
   <br />
 
-  <button @click="changeImg">Change image</button>
+  <button @click="changeImg">Change image</button><!--click event-->
 
   <br />
 
@@ -20,9 +20,7 @@
   <p :class="className">Harry Potter</p>
 
   <!-- define a JS object in :class -->
-  <p :class="{ inactive: isInactive, center: isCenter }">
-    <!-- if you think embedding a JS object in HTML is verbose, you can choose to move the object to the script, 
-        give it a name, and only put the JS object name in :class -->
+  <p :class="{ inactive: isInactive, center: isCenter }"> <!--sets val based off of booolean data-->
     Harry Potter
   </p>
 
@@ -33,18 +31,19 @@
 <script setup>
 import { ref } from 'vue'
 
-let message = 'Hello, v-bind!'
-let imageUrl = ref('public/img/banner_1.jpg')
+
+let message = 'Hello, v-bind!';
+let imageUrl = ref('public/img/banner_1.jpg');
 
 function changeImg() {
-  imageUrl.value = 'public/img/banner_2.jpg'
+  imageUrl.value = 'public/img/banner_2.jpg';
 }
 
-let defaultInputText = 'Write something here...'
+let defaultInputText = 'Write something here...';
 
-let className = ref('active')
-let isInactive = ref(true)
-let isCenter = ref(false)
+let className = ref('active');
+let isInactive = ref(true);
+let isCenter = ref(false);
 </script>
 
 <style scoped>
