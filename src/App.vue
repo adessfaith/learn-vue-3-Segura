@@ -2,8 +2,9 @@
   <h1>message:{{ message }}</h1>
   <hr/>
   <h1>number:{{ number }}</h1>
-  <h1>doubleNum(50):{{ doubleNum(num) }}</h1>
-  <hr/><h1>number*2 = {{ number*2 }};</h1>
+  <h1>doubleNum(50):{{ doubleNum(50) }}</h1>
+  <hr/>
+  <h1>number*2 = {{ number*2 }}</h1>
   <h1>{{ number>150? 'number is greater than 150' : 'number is greater than 150'}}</h1>
   <hr/>
   <h1 v-text="number"></h1>
@@ -25,6 +26,17 @@ let message = 'Hello, Vue!';
 let number = 430;
 function doubleNum(num){
   return num*2;
+}
+
+let harry = {
+  id: 1001,
+  name: 'Harry Potter',
+  house: 'Gryffindor',
+  age: 17, // Age during the final battle of Hogwarts
+  wand: {
+    core: 'Phoenix feather',
+    wood: 'Holly'
+  }
 }
 const hogwartsWizards = [
   {
@@ -72,7 +84,7 @@ let rawHtml = '<span style ="color:red">This should be an HTML snipit</span>'
 
 </script>
 
-<style lang="scss" scoped>
+<style  scoped>
 
 </style>
 
