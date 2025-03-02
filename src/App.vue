@@ -1,13 +1,59 @@
 <template>
   <h1>{{ message }}</h1>
-  <p>What has keys bit can't open locks, space but no room, and can't go outside? What am I?</p>
-  <button style="width:200px" @click="showAnswer=!showAnswer">{{ !showAnswer ?'Show me the answer!':'Hide the answer!' }} </button>
-  <div v-if="showAnswer">A keyboard.</div>
-  <div v-show="showAnswer">A keyboard.</div> <!--will be rendered in the DOM,GOod for Often changing conditions -->
- <!-- <div v-if="Math.random()> 0.5"> Now you see me</div>
-  <div v-else> Now you don't</div>!-->
-  <div v-if="showAnswer"> Now you see me</div> <!--will not be rendered on the DOM tree, good for conditions thyat change less often-->
-  <div v-else> Now you don't</div>
+  <button @click="sortUsersByAge">Sort users by age</button>
+  <button @click="hideInactiveUsers">Hide inactive users</button>
+  <button @click="showFirstTwoUsers">Show first two users</button>
+  <ul>
+    <li v-for="(user, index) in users" :key="user.id">
+      {{ index }} - {{ user.id }} - {{ user.name }} - {{ user.age }} -
+      {{ user.isActive }}
+    </li>
+  </ul>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+let message = ref('Hello, Array Change Detection!')
+
+const users = ref([
+  { id: 1001, name: 'John Smith', age: 26, isActive: false },
+  { id: 1002, name: 'Tom Doe', age: 16, isActive: false },
+  { id: 1003, name: 'Frankin Wong', age: 18, isActive: true }
+])
+
+function sortUsersByAge() {
+  users.value.sort((a, b) => a.age - b.age)
+}
+
+// filter is a non-mutating method, so we need to replace the old array
+function hideInactiveUsers() { //non-mutating, returns a new array, does not replace the old one
+  users.value = users.value.filter((user) => user.isActive)
+}
+
+// slice is a non-mutating method, so the old array needs to be replaced.
+function showFirstTwoUsers() { 
+  users.value = users.value.slice(0, 2)
+}
+//filter , cat, and slice are non-mutating methods of an array
+</script>
+
+<style scoped>
+.inactive {
+  color: red;
+  text-decoration: line-through;
+}
+</style>
+<!-- <template>
+  <h1>{{ message}}</h1>
+  <button @click="sortUsersByAge">Sort users by age</button>
+  <ul>
+    <li v-for="(user,index) in users" :key="user.id">
+      {{ index }}-{{ user.id}}-{{ user.name}} -{{ user.age }}-{{user.isActive}}
+
+    </li>
+  </ul>
+  
 
 
  
@@ -16,13 +62,15 @@
 </template>
 
 <script setup>
-import {ref } from 'vue'
+import {ref} from 'vue'
+let message = ref('Hello, Array Cange Detection!')
 
-let message = ref('Hello, v-if!')
-let showAnswer = ref(false);
+const users = ref('Hello, Array Change Detection!')
+const user = ref([{id:1001,name: 'John Smith', age:26, isActive:false},
+'}])
 
 
-</script>
+</script> -->
 
 
 
