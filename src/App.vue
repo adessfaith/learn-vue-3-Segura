@@ -1,69 +1,29 @@
 <template>
-  <h1>{{ message }}</h1>
-  <div>
-    <form @submit.prevent="register">
-      <div>
-        <label for="email"> Email: </label>
-        <input
-          id="email"
-          v-model="email"
-          type="email"
-          placeholder="Enter your email"
-        />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input
-          id="password"
-          v-model="password"
-          type="password"
-          placeholder="Create a password"
-        />
-      </div>
-      <button type="submit" :disable="!isFormValid">Register</button>
-    </form>
-  </div>
-  <div class ="card">
-    <h2>Name:{{ wizard1.name}}</h2>
-    <h2> Wand: {{ wizard1.wand }}
-    </h2>
-
-    <h2> Age: {{ wizard1.age }}</h2>
-    <button @click="wizard1.name = wizard1.name.toUpperCase()"> Change name to UPPERCASE</button>
-    <button @click="wizard1.wand.core = 'Unicorn hair'">Change wand core</button>
-    <button @click="wizard1.age = 20"> Change age</button>
+  <div class="card">
+    <h1 ref="title">Hello, Template Refs!</h1>
+    <input type="text" ref="input" />
+    <br />
+    <button @click="printDomElements">Print DOM elements in console log</button>
+    <button @click="printDomElements">Print DOM elements</button>
+    <button @click="changeTitle">Change title</button>
   </div>
 </template>
+
 <script setup>
-import { ref, watch, watchEffect } from "vue";
-let message = ref("Hello, watchEffect!");
-const email = ref("");
-const password = ref("");
-const isFormValid = ref(false);
-// watch([email, password], () => {
-//   const hasEmail = email.value.length > 0;
-//   const hasPassword = password.value.length > 0;
-//   isFormValid.value = hasEmail && hasPassword;
-// });
-watchEffect(() => {
-  //automatically track reactive data used in the function
+import { ref, onMounted } from "vue";
+let title = ref();
+let input = ref();
 
-  console.log("watchEffect");
-  const hasEmail = email.value.length > 0;
-  const hasPassword = password.value.length > 0;
-  isFormValid.value = hasEmail && hasPassword;
+function printDomElements() {
+  console.log(title.value);
+  console.log(input.value);
+}
+function changeTitle() {
+  title.value.innerText = "Hello world!";
+}
+onMounted(() => {
+  input.value.focus();
 });
-
-const register = () => {
-  alert("Regestration Sucessful!");
-};
-let wizard1 = ref({id:1001, name:'Harry Potter', house: 'Gryffindor', age: 17, wand: {core: 'Pheonix feather', wood: 'Holly'}})
-// watchEffect(()=>{
-//   console.log(wizard1.value.name, wizard1.value.wand.core);
-// })
-watchEffect(()=>{console.log(wizard1.value
-  
-)})
 </script>
 <style scoped>
 .card {
