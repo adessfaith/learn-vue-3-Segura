@@ -1,32 +1,38 @@
 <template>
-    <div class = 'blog-post'>
-        <p>
-            {{ message }}
-        </p>
-        <!--Display the id, title, content-->
-        <h2> {{ id }} - {{ blogPostTitle }}</h2>
-        <h4> {{blogPostContent}}</h4>
-        <button @click="changeBlogPostTitle"> Change Blog Post Title</button>
-
-    </div>
+  <div class="blog-post">
+    <p>
+      {{ message }}
+    </p>
+    <!-- Display the id, title, and content of a blog post. -->
+    <h2>{{ id }} - {{ blogPostTitle }}</h2>
+    <h4>{{ blogPostContent }}</h4>
+    <button @click="$emit('delete-blog-post', id)" >Delete post</button>
+    <button @click="emitDeletePostEvent(id)" >Delete post</button>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-let message = ref('This is the BlogPost component.');
-const props = defineProps(['id','blogPostTitle','blogPostContent']); //returns an object with all the props, so we can access it outside the script
-console.log(props.blogPostContent);
-// defineProps({id:Number, blogPostTitle:String, blogPostContent:String});
-function changeBlogPostTitle(){
-    props.blogPostTitle = "A different title";
+import { ref } from "vue";
+
+let message = ref("This is the BlogPost component.");
+const props = defineProps(["id", "blogPostTitle", "blogPostContent"]);
+// console.log(props.blogPostTitle)
+// defineProps({
+//   id: Number,
+//   blogPostTitle: String,
+//   blogPostContent: String
+// })
+const emit = defineEmits(['delete-blog-post']);
+function emitDeletePostEvent(id){
+    emit('delete-blog-post',id);
 }
+
 </script>
 
 <style scoped>
-.blog-post{
-    background-color: aqua;
-    padding: 10px;
-    margin-bottom: 10px;
+.blog-post {
+  background-color: aqua;
+  padding: 10px;
+  margin-bottom: 10px;
 }
-
 </style>
