@@ -1,17 +1,18 @@
 <template>
- <AlertBox>Invalud username or password, please try again!</AlertBox> <!--Template content is the text in between Alert box components-->
- <AlertBox></AlertBox>
- <AlertBox>
-  <h1>Request timed out!</h1>
- </AlertBox>
- <h1>Hello Slots!</h1>
+  <BaseLayout>Header, Main, Footer</BaseLayout>
+  <BaseLayout>
+    <template #header> <h1>title</h1></template>
+    <template #main>
+      <p>Main Content</p>
+    </template>
+    <template #footer>
+      <p>Contact Info!</p>
+    </template>
+  </BaseLayout>
 </template>
 
 <script setup>
-import AlertBox from './AlertBox.vue';
-
+import BaseLayout from "./BaseLayout.vue";
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
