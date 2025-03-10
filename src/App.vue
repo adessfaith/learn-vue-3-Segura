@@ -1,29 +1,17 @@
 <template>
-  <h1>Message: {{ message }}</h1>
-  <div style="background-color: orange; padding-left: 10px" >
-    <ComponentA></ComponentA>
-  </div>
- </template>
- 
- <script setup>
- import {ref, provide, readonly} from 'vue';
+ <AlertBox>Invalud username or password, please try again!</AlertBox> <!--Template content is the text in between Alert box components-->
+ <AlertBox></AlertBox>
+ <AlertBox>
+  <h1>Request timed out!</h1>
+ </AlertBox>
+ <h1>Hello Slots!</h1>
+</template>
 
- import ComponentA from './ComponentA.vue';
- 
- let message = ref('Hello, Provide/inject');
+<script setup>
+import AlertBox from './AlertBox.vue';
 
- provide('msg', {message, updateMessage});
+</script>
 
-function updateMessage(){
-  message.value = 'Hello, Provide/Inject! Updated!';
-}
+<style scoped>
 
-let count = ref(0);
-provide('read-only-count',readonly(count));
-
- 
- </script>
- 
- <style scoped>
- 
- </style>
+</style>
