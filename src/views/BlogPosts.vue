@@ -3,27 +3,34 @@
     <aside class="blog-post-list">
       <BlogPostList></BlogPostList>
     </aside>
-    <main class="blog-post-content">
-      <Router-view></Router-view>
+    <main class="blog-post-content-with-sidebar">
+      <Router-view class ="blog-post-content"></Router-view>
+      <router-view name="sidebar"></router-view>
     </main>
   </div>
 </template>
 
 <script setup>
-import BlogPostList from "@/components/BlogPostList.vue";
+import BlogPostList from '@/components/BlogPostList.vue'
 </script>
 
 <style lang="scss" scoped>
 .blog-posts-layout {
-  display: flex;
-  gap: 1rem;
+    display: flex;
+    width: 100%;
+    gap: 1rem;
 
-  .blog-post-list {
-    flex: 0 0 25%;
-  }
+    .blog-post-list {
+        flex: 0 0 25%
+    }
 
-  .blog-post-content {
-    flex: 0 0 75%;
-  }
+    .blog-post-content-with-sidebar {
+        display: flex;
+        flex: 0 0 75%;
+
+        .blog-post-content {
+            flex: 1; // Take up the remaining space
+        }
+    }
 }
 </style>

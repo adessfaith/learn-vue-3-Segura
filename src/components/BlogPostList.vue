@@ -1,37 +1,35 @@
 <template>
-  <div class="blog-list-container">
-    <h2>BlogPosts</h2>
-    <div v-if="loading">Loading.."></div>
-    <div v-else-if="err">{{ err }}</div>
-    <div class = "blog-post-list" v-else></div>
-        <router-link v-for="blogPost in blogPosts":key="blogPost.id" :to="{name: 'blogPost', params: {id: blogPost.id }}" class="blog-item">{{ blogPost.title }}</router-link>
-
-  </div>
+    <div class="blog-list-container">
+        <h2>Blog Posts</h2>
+        <div v-if="loading">Loading...</div>
+        <div v-else-if="err"> {{ err }}</div>
+        <div class="blog-post-list" v-else>
+            <router-link v-for="blogPost in blogPosts" :key="blogPost.id"
+                :to="{ name: 'blogPost', params: { id: blogPost.id } }" class="blog-item">
+                {{ blogPost.title }}
+            </router-link>
+        </div>
+    </div>
 </template>
 
 <script setup>
 import api from '@/apis/blogPosts'
-import {ref, onMounted} from 'vue'
+import { ref, onMounted } from 'vue'
 
 const blogPosts = ref([])
 const loading = ref(true)
 const err = ref(null)
 
 onMounted(loadBlogPosts)
-async function loadBlogPosts() {
-    try { blogPosts.value = await api.findAll
 
-        
+async function loadBlogPosts() {
+    try {
+        blogPosts.value = await api.findAll()
     } catch (error) {
         err.value = 'An error occurred while fetching the blog posts.'
-
-        
-    }
-    finally{
+    } finally {
         loading.value = false
-
     }
-    
 }
 </script>
 

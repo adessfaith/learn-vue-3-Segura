@@ -2,11 +2,11 @@
   <div clas="blog-post-container">
     <div v-if="loading">loading...</div>
     <div v-else-if="blogPost">
-      \
+      
       <div>Blog Id: {{ $route.params.div }}</div>
       <h1 class="blog-title">{{ blogPost.title }}</h1>
       <div class="blog-content">
-        <p>{blogPost.content}</p>
+        <p>{{blogPost.content}}</p>
       </div>
     </div>
     <div v-else>Failed to load blog post. Please try again later</div>
