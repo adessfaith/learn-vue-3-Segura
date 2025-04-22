@@ -4,33 +4,43 @@
       <BlogPostList></BlogPostList>
     </aside>
     <main class="blog-post-content-with-sidebar">
-      <Router-view class ="blog-post-content"></Router-view>
+      <router-view class="blog-post-content" v-slot="{ Component, route }">
+        <transition
+          mode="out-in"
+          enter-active-class="animate_animated animate_rotateInDownLeft animate_faster"
+          leave-active-class="animate_animated animate_rotateUpRight animate_faster"
+        >
+          <component :is="Component" :key="route.path"></component>
+        </transition>
+      </router-view>
+
       <router-view name="sidebar"></router-view>
     </main>
+    
   </div>
 </template>
 
 <script setup>
-import BlogPostList from '@/components/BlogPostList.vue'
+import BlogPostList from "@/components/BlogPostList.vue";
 </script>
 
 <style lang="scss" scoped>
 .blog-posts-layout {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+
+  .blog-post-list {
+    flex: 0 0 25%;
+  }
+
+  .blog-post-content-with-sidebar {
     display: flex;
-    width: 100%;
-    gap: 1rem;
+    flex: 0 0 75%;
 
-    .blog-post-list {
-        flex: 0 0 25%
+    .blog-post-content {
+      flex: 1; // Take up the remaining space
     }
-
-    .blog-post-content-with-sidebar {
-        display: flex;
-        flex: 0 0 75%;
-
-        .blog-post-content {
-            flex: 1; // Take up the remaining space
-        }
-    }
+  }
 }
 </style>

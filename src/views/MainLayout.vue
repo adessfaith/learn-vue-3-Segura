@@ -1,8 +1,16 @@
 <template>
     <div class = "main-layout">
         <Navigation></Navigation>
-        <router-view></router-view>
+        <router-view class ="blog-post-content" v-slot="{Component,route}">
+        <transition mode="out-in"
+          enter-active-class="route.meta.enterAnimation || 'animate__animated animate__fadeIn'"
 
+          leave-active-class="route.meta.leaveAnimation || 'animate__animated animate__fadeOut'">
+            <component :is="Component" ></component>
+        
+        </transition>
+        </router-view>
+       
     </div>
 </template>
 

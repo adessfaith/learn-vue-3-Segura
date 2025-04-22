@@ -32,6 +32,10 @@ const router = createRouter({
           path: "/blogPosts",
           name: "blogPosts",
           component: BlogPosts,
+          meta:{
+            enterAnimation: 'animate_animated animate_bounceIn',
+            leaveAnimation: 'animate_animated animate_bounceOut',
+          },
           redirect: { name: "blogPostsGreeting" },
           children: [
             {
