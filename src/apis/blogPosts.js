@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/blogPosts'
+const BASE_URL = "http://localhost:3000/blogPosts";
 
 /**
  * Fetch all blog posts from the API
@@ -6,16 +6,16 @@ const BASE_URL = 'http://localhost:3000/blogPosts'
  */
 const findAll = async () => {
   try {
-    const response = await fetch(BASE_URL)
+    const response = await fetch(BASE_URL);
     if (!response.ok) {
-      throw new Error(`Error fetching blog posts: ${response.statusText}`)
+      throw new Error(`Error fetching blog posts: ${response.statusText}`);
     }
-    return await response.json()
+    return await response.json();
   } catch (error) {
-    console.error(error)
-    throw error // Rethrow the error to be caught by the caller
+    console.error(error);
+    throw error; // Rethrow the error to be caught by the caller
   }
-}
+};
 
 /**
  * Fetch a single blog post by its ID
@@ -24,67 +24,62 @@ const findAll = async () => {
  */
 const findById = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}/${id}`)
+    const response = await fetch(`${BASE_URL}/${id}`);
     if (!response.ok) {
       throw new Error(
         `Error fetching blog post with ID ${id}: ${response.statusText}`
-      )
+      );
     }
-    return await response.json()
+    return await response.json();
   } catch (error) {
-    console.error(error)
-    throw error // Rethrow the error to be caught by the caller
+    console.error(error);
+    throw error; // Rethrow the error to be caught by the caller
   }
-}
+};
 
-export default { findAll, findById }
+export default { findAll, findById };
 // const BASE_URL = 'http://localhost:3000/blogPosts'
 
 // @returns {Promise<Array>}
 
 // const findAll = async()=>{
-  
+
 //     try {
 //         const response = await fetch(BASE_URL)
-        
+
 //         if(!response.ok){
 //             throw new Error(`Error fetching blog posts: ${response.statusText}`)
 //         }
 //         return await response.json()
-    
+
 //     } catch (error) {
 //         console.error(error)
 //         throw error
-    
-        
+
 //     }
 
-
 // }
-
 
 // @Param(number)
 // @returns {Promise<Object>}
 
 // const findById = async()=>{
-  
+
 //     try {
 //         const response = await fetch(`${BASE_URL}/${id}`)
-        
+
 //         if(!response.ok){
 //             throw new Error(
 //                 `Error fetching blog post with ID ${id}: ${response.statusText}`
 //               )
 
-           
 //         }
 //         return await response.json()
-    
+
 //     } catch (error) {
 //         console.error(error)
 //         throw error //return error to be caught by the caller
-    
-        
+
 //     }
 // }
 

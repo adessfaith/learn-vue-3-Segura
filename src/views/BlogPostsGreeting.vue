@@ -10,37 +10,34 @@
 </template>
 
 <script>
+import api from "@/apis/blogPosts";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
-import api from '@/apis/blogPosts'
-import {ref, onMounted} from 'vue'
-import {useRouter} from 'vue-router'
+const blogPosts = ref([]);
 
-const blogPosts = ref([])
+const router = useRouter();
 
-const router = useRouter()
-
-onMounted(loadBlogPosts)
+onMounted(loadBlogPosts);
 
 async function loadBlogPosts() {
-    try {
-        blogPosts.value = await api.findAll()
-        
-    } catch (error) {console.error('Failed to fetch blog posts:', error)
-        
-    }
-    
+  try {
+    blogPosts.value = await api.findAll();
+  } catch (error) {
+    console.error("Failed to fetch blog posts:", error);
+  }
 }
 
-function goToRandomBlogPost(){
-    if(blogPosts.value.length === 0){
-        alert('No blog posts available!')
-        return
-    }
+function goToRandomBlogPost() {
+  if (blogPosts.value.length === 0) {
+    alert("No blog posts available!");
+    return;
+  }
 
-    const randomIndex = Math.floor(Math.random()*blogPosts.value.length)
+  const randomIndex = Math.floor(Math.random() * blogPosts.value.length);
 
-    const randomBlogPost = blogPosts.value[randomIndex]
-    router.push({name:'blogPost', params:{id:randomBlogPost.id}})
+  const randomBlogPost = blogPosts.value[randomIndex];
+  router.push({ name: "blogPost", params: { id: randomBlogPost.id } });
 }
 </script>
 

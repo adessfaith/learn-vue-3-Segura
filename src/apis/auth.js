@@ -1,12 +1,20 @@
-import {ref} from 'vue'
+import { ref } from "vue";
 
-const isAuthenticated = ref(false)
+const isAuthenticated = ref(false);
+const userRole = ref("");
 
+const login = async (username, password) => {
+  isAuthenticated.value = true;
+  userRole.value = username === "vipUser" ? "vip" : "regular";
+};
 
-const login  = async(username, password)=>
-    {isAuthenticated.value = true}
+const logout = async (username, password) => {
+  isAuthenticated.value = false;
+  userRole.value = "";
+};
 
-const logout  = async(username, password)=>
-    {isAuthenticated.value = false}
+const getUserRole = () => {
+  return userRole.value;
+};
 
-export {isAuthenticated, login, logout}
+export { isAuthenticated, login, logout, getUserRole };
