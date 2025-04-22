@@ -6,34 +6,83 @@ import BlogPost from "@/views/BlogPost.vue";
 import BlogPostsGreeting from "@/views/BlogPostsGreeting.vue";
 import NotFound from "@/views/NotFound.vue";
 import Ads from "@/views/Ads.vue";
+import Login from "@/views/Login.vue";
+import MainLayout from "@/views/MainLayout.vue";
+import { isAuthenticated } from "@/apis/auth";
+
 const router = createRouter({
   //provide the history implementation to use
   history: createWebHistory(),
 
   //define wraps, each route mapper should be mapped to a component
   routes: [
-    { path: "/", name: "home", component: Home },
     {
-      path: "/blogposts",
-      name: "blogPosts",
-      component: BlogPosts,
-      redirect: { name: "blogPostsGreeting" },
+      path: "/",
+      name: "mainLayout",
+      component: MainLayout,
+      redirect: { name: "home" },
       children: [
         {
-          path: "/blogPostsGreeting",
-          name: "blogPostsGreeting",
-          component: BlogPostsGreeting,
+          path: "/home",
+          name: "home",
+          component: Home,
+          meta: { requiresAuth: false },
         },
         {
-          path: "/blogPosts/:id(\\d+)",
-          name: "blogPost",
-          components: { default: BlogPost, sidebar: Ads },
+          path: "/blogPosts",
+          name: "blogPosts",
+          component: BlogPosts,
+          redirect: { name: "blogPostsGreeting" },
+          children: [
+            {
+              path: "",
+              name: "blogPostsGreeting",
+              component: BlogPostsGreeting,
+              meta: { requiresAuth: false },
+            },
+            {
+              path: "/blogPosts/:id(\\d+)",
+              name: "blogPost",
+              components: {
+                default: BlogPost,
+                sidebar: Ads,
+              },
+              meta: { requiresAuth: true },
+            },
+          ],
+        },
+        {
+          path: "/about",
+          name: "about",
+          component: About,
+          meta: { requiresAuth: false },
         },
       ],
     },
-    { path: "/about", name: "about", component: About },
-    { path: "/:pathMatch(.*)*", name: "notFound", component: NotFound },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+      meta: { requiresAuth: false },
+    },
+    {
+      //no explicit paths
+      path: "/:pathMatch(.*)*",
+      component: NotFound,
+      meta: { requiresAuth: false },
+    },
   ],
+});
+
+router.beforeEach((to, from) => {
+  console.log(from.name, "->", to.name);
+  if (to.meta.requiresAuth && !isAuthenticated.value) {
+    return { name: "login", query: { redirect: to.fullPath } };
+  }
+});
+router.beforeEach((to, from) => {
+  console.log(`Successfully navigated to: ${to.fullPath}`);
+  
 });
 
 //Export router instance
